@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synth", "Synth.csproj", "{47730A57-348E-4BCB-8285-D3542C1D59B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{47730A57-348E-4BCB-8285-D3542C1D59B7}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

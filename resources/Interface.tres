@@ -1,0 +1,65 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dskxfs6wb5ijf"]
+
+[ext_resource type="Texture2D" uid="uid://bdvyks2h0xg2m" path="res://Assets/Spin.png" id="1_bydht"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfgov"]
+bg_color = Color(0.247361, 0.628805, 0.544716, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kegal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dh6oo"]
+bg_color = Color(0.240059, 0.452176, 0.46924, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npb72"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1acyw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nsymy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvig1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67cy3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q66dv"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.286275, 0.701961, 0.607843, 1)
+border_width_top = 2
+border_color = Color(0.688861, 0.967159, 0.892328, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jc7y"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1864, 0.501239, 0.432285, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+LineEdit/font_sizes/font_size = 16
+LineEdit/styles/focus = null
+LineEdit/styles/normal = SubResource("StyleBoxFlat_sfgov")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_kegal")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_dh6oo")
+SpinBox/icons/updown = ExtResource("1_bydht")
+TabBar/colors/font_unselected_color = Color(1, 1, 1, 0.415686)
+TabBar/styles/button_highlight = SubResource("StyleBoxEmpty_npb72")
+TabBar/styles/button_pressed = SubResource("StyleBoxEmpty_1acyw")
+TabBar/styles/tab_disabled = SubResource("StyleBoxEmpty_nsymy")
+TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_bvig1")
+TabBar/styles/tab_hovered = SubResource("StyleBoxEmpty_67cy3")
+TabBar/styles/tab_selected = SubResource("StyleBoxFlat_q66dv")
+TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_2jc7y")
