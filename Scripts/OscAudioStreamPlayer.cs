@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 struct Setting{
 	public static float mix_rate = 441000F;
@@ -13,7 +14,7 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
 	[Flags]
 
     private enum _KeyName {
-        C=1,Db,D,Eb,E,F,Gb,G,Ab,A,Bb,B
+        C,Db,D,Eb,E,F,Gb,G,Ab,A,Bb,B
     }
 
     public static OscAudioStreamPlayer Instance { get; set; }
@@ -23,14 +24,19 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
 
     public float value;
 
+	public int[] BitMasks = new int[7];//Up to 7 NoteGroups
+
+
+
     AudioStreamGenerator AudioStreamGenerator = new AudioStreamGenerator();
 
+
 	public override void _Ready(){
+
 		Instance = this;
         Stream = AudioStreamGenerator;
         // MaxPolyphony = 32767;
         Play();
-
 		// GD.Print(Player);
 		var generator = (AudioStreamGenerator)Instance.Stream;
 		// GD.Print(generator);
@@ -41,56 +47,78 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
 		(index) => Wave = (Setting.BasicWaves)index;//OptionsBar must precede this singleton into SceneTree
 	}
 
-    private float phase = 0.0F;
-    private float frequency;
-	internal void _fill_buffer(){
-		int to_fill = playback.GetFramesAvailable();
-		while (to_fill >0){
-            value = (float)Mathf.Sin(Math.Tau*phase);
-			playback.PushFrame(Vector2.One * value);
-            phase = (float)Mathf.PosMod(phase+0.001,1.0);
-			to_fill-=1;
-		}
-        
+    public override void _PhysicsProcess(double delta)
+    {
+        _fill_buffer();
     }
 
+    private static int MaxNote = 12*10;
+    private float[] phase = new float[MaxNote];
 
-    private float _get_pitch(_KeyName Keyname,byte Range){
-		float A = (float)(Tuning.A4 * Math.Pow(2,Range-4));
+	internal void _fill_buffer(){
+		int to_fill = playback.GetFramesAvailable();
+
+		while (to_fill >0){
+			value = 0;
+
+			for (int range=0;range<7;range++){
+				int BitMask = BitMasks[range];
+				if (BitMask == 0){
+					continue;
+				}
+				for (int i=0;BitMask!=0;i++){
+					if ((BitMask&1)==1){
+						value += calculate_value(Wave,i,range);
+					}
+					BitMask >>= 1 ;
+				}
+			}
+
+			playback.PushFrame(Vector2.One * value);
+			to_fill-=1;
+		}
+    }
+
+    private float _get_frequency(int i,int range){
+		float A = (float)(Tuning.A4 * Math.Pow(2,range-4));
         // GD.Print("\nStandard A in this Group:",A);
 		byte A_index = (byte)Tuning.NameSet.A;
-		byte index = (byte)Keyname;
-        // GD.Print("keyname:",
-        //         Keyname);
+		byte index = (byte)i;
+        // GD.Print("i:",i);
         // GD.Print("Frequency:",(float)(A * Math.Pow(Tuning.TETScaler,index-A_index)));
 		return (float)(A * Math.Pow(Tuning.TETScaler,index-A_index));
 	}
 	
- 	internal float calculate_value(Setting.BasicWaves wave){
+
+ 	internal float calculate_value(Setting.BasicWaves Wave,int index,int range){
 		float result;
+		float frequency = _get_frequency(index,range);
 		float increment = frequency / Setting.mix_rate;
-		result = (float)Choose_Wave(Wave);
-		phase = (float)Mathf.PosMod(phase+increment,1.0);
+		result = (0.1f)*(float)Choose_Wave(Wave,index,range);
+		phase[index+range*12] = (float)Mathf.PosMod(phase[index+range*12]+increment,1.0);
 		return result;
     }
 
-	float Choose_Wave(Setting.BasicWaves Wave){
+	float Choose_Wave(Setting.BasicWaves Wave,int index,int range){
+		float CurrentPhase = phase[index+range*12];
 		switch(Wave){
 			case Setting.BasicWaves.Sine:
-				return (float)Mathf.Sin(Math.Tau*phase);
+				return (float)Mathf.Sin(Math.Tau*CurrentPhase);
 			case Setting.BasicWaves.Square:
-				return (phase<0.5)?0:1;
+				return (CurrentPhase<0.5)?0:1;
 			case Setting.BasicWaves.Triangle:
-				return (phase<0.5)?(2*phase-0.5F):-2*(phase-0.75F);
+				return (CurrentPhase<0.5)?(2*CurrentPhase-0.5F):-2*(CurrentPhase-0.75F);
 			case Setting.BasicWaves.Pulse:
-				return (phase<0.25)?0:1;
+				return (CurrentPhase<0.25)?0:1;
 			case Setting.BasicWaves.Saw:
-				return phase-0.5F;
+				return CurrentPhase-0.5F;
 			case Setting.BasicWaves.Random:
 				return 0;
 			default:
 				return 0;
 	    }
-    }   
+    }
+
+
 }
 

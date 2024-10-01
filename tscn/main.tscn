@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b03hhfg7m33su" path="res://tscn/Interface/Interface.tscn" id="2_fiqno"]
 [ext_resource type="Script" path="res://Scripts/OscAudioStreamPlayer.cs" id="3_aylbn"]
 
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mpawr"]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_obo55"]
 resource_local_to_scene = true
 
 [node name="Main" type="Node"]
@@ -12,6 +12,6 @@ resource_local_to_scene = true
 [node name="Interface" parent="." instance=ExtResource("2_fiqno")]
 
 [node name="OscAudioStreamPlayer" parent="." instance=ExtResource("2_4dbst")]
-stream = SubResource("AudioStreamGenerator_mpawr")
+stream = SubResource("AudioStreamGenerator_obo55")
 volume_db = 0.0
 script = ExtResource("3_aylbn")
