@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://5p0iwxvhe22a"]
+[gd_scene load_steps=5 format=3 uid="uid://5p0iwxvhe22a"]
 
+[ext_resource type="PackedScene" uid="uid://de3vbn1eg4fq4" path="res://tscn/OscAudioStreamPlayer.tscn" id="2_4dbst"]
 [ext_resource type="PackedScene" uid="uid://b03hhfg7m33su" path="res://tscn/Interface/Interface.tscn" id="2_fiqno"]
+[ext_resource type="Script" path="res://Scripts/OscAudioStreamPlayer.cs" id="3_aylbn"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_mpawr"]
+resource_local_to_scene = true
 
 [node name="Main" type="Node"]
 
 [node name="Interface" parent="." instance=ExtResource("2_fiqno")]
+
+[node name="OscAudioStreamPlayer" parent="." instance=ExtResource("2_4dbst")]
+stream = SubResource("AudioStreamGenerator_mpawr")
+volume_db = 0.0
+script = ExtResource("3_aylbn")

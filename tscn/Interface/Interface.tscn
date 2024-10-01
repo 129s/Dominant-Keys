@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b03hhfg7m33su"]
+[gd_scene load_steps=5 format=3 uid="uid://b03hhfg7m33su"]
 
 [ext_resource type="PackedScene" uid="uid://bca0lwvx23752" path="res://tscn/Interface/notes.tscn" id="1_53tbe"]
+[ext_resource type="Theme" uid="uid://dskxfs6wb5ijf" path="res://resources/Interface.tres" id="1_hxcdu"]
 [ext_resource type="PackedScene" uid="uid://cp736iyjcgijw" path="res://tscn/Interface/options_bar.tscn" id="1_rvvps"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvlt7"]
-bg_color = Color(0.409242, 0.635197, 0.518702, 1)
-border_color = Color(0.72549, 0.780392, 0.831373, 1)
+[ext_resource type="Script" path="res://Scripts/OptionsBar.cs" id="3_5l21h"]
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -18,28 +16,46 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_edit_lock_ = true
 
-[node name="Keyboard" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(240, 144)
+[node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 178.0
-offset_top = 167.0
-offset_right = 988.0
-offset_bottom = 455.0
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_nvlt7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Keyboard"]
+[node name="Placeholder" type="Container" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Keyboard" type="MarginContainer" parent="Container"]
+custom_minimum_size = Vector2(240, 144)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_hxcdu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Keyboard"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="OptionsBar" parent="Keyboard/VBoxContainer" instance=ExtResource("1_rvvps")]
+[node name="OptionsBar" parent="Container/Keyboard/VBoxContainer" instance=ExtResource("1_rvvps")]
 layout_mode = 2
+script = ExtResource("3_5l21h")
 
-[node name="Notes" parent="Keyboard/VBoxContainer" instance=ExtResource("1_53tbe")]
+[node name="Notes" parent="Container/Keyboard/VBoxContainer" instance=ExtResource("1_53tbe")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
+
+[node name="Placeholder2" type="Container" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5

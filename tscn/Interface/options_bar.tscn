@@ -1,6 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp736iyjcgijw"]
+[gd_scene load_steps=19 format=3 uid="uid://cp736iyjcgijw"]
 
 [ext_resource type="Theme" uid="uid://dskxfs6wb5ijf" path="res://resources/Interface.tres" id="1_wu7xe"]
+[ext_resource type="Texture2D" uid="uid://c6be76uiv177d" path="res://Assets/BasicWaves.png" id="2_gsxed"]
+[ext_resource type="Script" path="res://Scripts/PitchLabels.cs" id="2_wt6yv"]
+[ext_resource type="Texture2D" uid="uid://bv5u41eo7us0m" path="res://Assets/Reset.png" id="3_abuks"]
+[ext_resource type="Texture2D" uid="uid://dbkvpmenebr0d" path="res://Assets/PlayModeIcon.png" id="4_d6vbe"]
+[ext_resource type="Script" path="res://Scripts/PlayMode.cs" id="5_kp531"]
+[ext_resource type="Script" path="res://Scripts/Reset.cs" id="7_kepn2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_72v25"]
 
@@ -16,14 +22,41 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 2
 shadow_color = Color(0.0215676, 0.167954, 0.272563, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_8wgw6"]
-font_names = PackedStringArray("Times New Roman")
-subpixel_positioning = 0
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj4wv"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d32a1"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srho2"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njprb"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4go3f"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgbuv"]
+atlas = ExtResource("2_gsxed")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="Theme" id="Theme_83nfj"]
+TabBar/constants/h_separation = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfr4g"]
+atlas = ExtResource("4_d6vbe")
+region = Rect2(0, 0, 26, 18)
 
 [node name="OptionsBar" type="HBoxContainer"]
 offset_left = 2.0
 offset_top = 24.0
-offset_right = 600.0
+offset_right = 1044.0
 offset_bottom = 63.0
 theme_override_constants/separation = 0
 alignment = 2
@@ -53,6 +86,7 @@ label_settings = SubResource("LabelSettings_ijs0t")
 horizontal_alignment = 1
 
 [node name="PlacerHolder" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 0
@@ -60,40 +94,37 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 2
 
-[node name="Toolbar" type="MarginContainer" parent="."]
+[node name="WaveOption" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Toolbar"]
+[node name="Waves" type="OptionButton" parent="WaveOption"]
 layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ToolBar" type="HBoxContainer" parent="Toolbar/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="PlayMode" type="VBoxContainer" parent="Toolbar/VBoxContainer/ToolBar"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 8
-
-[node name="PlayMode" type="TabBar" parent="Toolbar/VBoxContainer/ToolBar/PlayMode"]
-layout_mode = 2
-size_flags_vertical = 3
 theme = ExtResource("1_wu7xe")
-theme_override_fonts/font = SubResource("SystemFont_8wgw6")
-current_tab = 0
-clip_tabs = false
-tab_count = 2
-tab_0/title = "CHD"
-tab_0/tooltip = "ChordMode"
-tab_1/title = "ARP"
-tab_1/tooltip = "ArpeggioMode"
+alignment = 1
+selected = 0
+item_count = 6
+popup/item_0/text = "Sine"
+popup/item_0/icon = SubResource("AtlasTexture_mj4wv")
+popup/item_1/text = "Square"
+popup/item_1/icon = SubResource("AtlasTexture_d32a1")
+popup/item_1/id = 1
+popup/item_2/text = "Triangle"
+popup/item_2/icon = SubResource("AtlasTexture_srho2")
+popup/item_2/id = 2
+popup/item_3/text = "Pulse"
+popup/item_3/icon = SubResource("AtlasTexture_njprb")
+popup/item_3/id = 3
+popup/item_4/text = "Saw"
+popup/item_4/icon = SubResource("AtlasTexture_4go3f")
+popup/item_4/id = 4
+popup/item_5/text = "Random"
+popup/item_5/icon = SubResource("AtlasTexture_lgbuv")
+popup/item_5/id = 5
+popup/item_5/disabled = true
 
 [node name="PitchDisplayer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -102,19 +133,57 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 2
 
-[node name="Background" type="PanelContainer" parent="PitchDisplayer"]
+[node name="PitchLabels" type="CheckButton" parent="PitchDisplayer"]
 layout_mode = 2
 theme = ExtResource("1_wu7xe")
+text = "Labels"
+alignment = 1
+script = ExtResource("2_wt6yv")
 
-[node name="MarginContainer4" type="MarginContainer" parent="PitchDisplayer/Background"]
+[node name="PlayMode" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 4
+theme = SubResource("Theme_83nfj")
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
 
-[node name="Label" type="Label" parent="PitchDisplayer/Background/MarginContainer4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayMode"]
 layout_mode = 2
-text = "440HZ"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 0
+
+[node name="ToolBar" type="HBoxContainer" parent="PlayMode/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="PlayMode" type="VBoxContainer" parent="PlayMode/VBoxContainer/ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayMode" type="Button" parent="PlayMode/VBoxContainer/ToolBar/PlayMode"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_wu7xe")
+theme_override_constants/h_separation = 0
+toggle_mode = true
+text = "Mode: "
+icon = SubResource("AtlasTexture_wfr4g")
+icon_alignment = 2
+script = ExtResource("5_kp531")
+
+[node name="Reset" type="MarginContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_wu7xe")
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
+
+[node name="Reset" type="Button" parent="Reset"]
+layout_mode = 2
+theme = ExtResource("1_wu7xe")
+text = "Reset"
+icon = ExtResource("3_abuks")
+icon_alignment = 2
+script = ExtResource("7_kepn2")
