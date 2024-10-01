@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2vktpoislj5s"]
+
+[ext_resource type="Script" path="res://Scripts/Osc.cs" id="1_f887x"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_o36ns"]
+buffer_length = 0.05
+
+[node name="Osc" type="Node" node_paths=PackedStringArray("Player")]
+script = ExtResource("1_f887x")
+Player = NodePath("Player")
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_o36ns")
+volume_db = 7.474

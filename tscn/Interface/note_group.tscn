@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cocumut0st26i"]
+[gd_scene load_steps=11 format=3 uid="uid://cocumut0st26i"]
 
+[ext_resource type="Script" path="res://Scripts/NoteGroup.cs" id="1_wrhew"]
 [ext_resource type="Script" path="res://Scripts/Note.cs" id="1_x1trx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqtiu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mv6vl"]
 bg_color = Color(0.560784, 0.796078, 1, 1)
@@ -62,6 +65,7 @@ offset_right = 267.0
 offset_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_wrhew")
 
 [node name="WhiteNotes" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -73,6 +77,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
@@ -83,17 +88,31 @@ script = ExtResource("1_x1trx")
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 3
+KeyName = 2
 
 [node name="E" type="Button" parent="WhiteNotes"]
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
+toggle_mode = true
+script = ExtResource("1_x1trx")
+KeyName = 4
+
+[node name="F" type="Button" parent="WhiteNotes"]
+custom_minimum_size = Vector2(16, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
@@ -101,49 +120,41 @@ toggle_mode = true
 script = ExtResource("1_x1trx")
 KeyName = 5
 
-[node name="F" type="Button" parent="WhiteNotes"]
-custom_minimum_size = Vector2(16, 64)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
-theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
-toggle_mode = true
-script = ExtResource("1_x1trx")
-KeyName = 6
-
 [node name="G" type="Button" parent="WhiteNotes"]
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 8
+KeyName = 7
 
 [node name="A" type="Button" parent="WhiteNotes"]
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 10
+KeyName = 9
 
 [node name="B" type="Button" parent="WhiteNotes"]
 custom_minimum_size = Vector2(16, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aqtiu")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 12
+KeyName = 11
 
 [node name="BlackNotes" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -189,7 +200,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 2
+KeyName = 1
 
 [node name="Control3" type="Control" parent="BlackNotes/1/Db/note"]
 layout_mode = 2
@@ -228,7 +239,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 4
+KeyName = 3
 
 [node name="Control3" type="Control" parent="BlackNotes/1/Eb/note"]
 layout_mode = 2
@@ -277,7 +288,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 7
+KeyName = 6
 
 [node name="Control3" type="Control" parent="BlackNotes/2/Gb/note"]
 layout_mode = 2
@@ -316,7 +327,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 9
+KeyName = 8
 
 [node name="Control3" type="Control" parent="BlackNotes/2/Ab/note"]
 layout_mode = 2
@@ -354,7 +365,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
 script = ExtResource("1_x1trx")
-KeyName = 11
+KeyName = 10
 
 [node name="Control3" type="Control" parent="BlackNotes/2/Bb/note"]
 layout_mode = 2

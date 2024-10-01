@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://5p0iwxvhe22a"]
+
+[ext_resource type="PackedScene" uid="uid://b03hhfg7m33su" path="res://tscn/Interface/Interface.tscn" id="2_fiqno"]
+
+[node name="Main" type="Node"]
+
+[node name="Interface" parent="." instance=ExtResource("2_fiqno")]

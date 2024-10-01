@@ -23,7 +23,7 @@ subpixel_positioning = 0
 [node name="OptionsBar" type="HBoxContainer"]
 offset_left = 2.0
 offset_top = 24.0
-offset_right = 622.0
+offset_right = 600.0
 offset_bottom = 63.0
 theme_override_constants/separation = 0
 alignment = 2
@@ -115,6 +115,6 @@ theme_override_constants/margin_bottom = 4
 
 [node name="Label" type="Label" parent="PitchDisplayer/Background/MarginContainer4"]
 layout_mode = 2
-text = "A4"
+text = "440HZ"
 horizontal_alignment = 1
 vertical_alignment = 1

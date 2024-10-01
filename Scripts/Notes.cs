@@ -5,20 +5,21 @@ public partial class Notes : MarginContainer
 {
 	// Called when the node enters the scene tree for the first time.
 	private static byte GroupAmount = 2;//***todo***
-	private Node[] Group;
-	private PackedScene NoteGroup = GD.Load<PackedScene>("Res://tscn/Interface/note_group.tscn");
+
+	private static byte InitialRange = 4;
+
+
+	private NoteGroup[] Group = new NoteGroup[GroupAmount];
+	private PackedScene _NoteGroup = GD.Load<PackedScene>("tscn/Interface/note_group.tscn");
 
 	public override void _Ready()
 	{
-		for (int i=0;i<GroupAmount;i++){
-			var CurrentGroup = Group[i] = NoteGroup.Instantiate();
+		for (byte i=0;i<GroupAmount;i++){
+			var CurrentGroup = _NoteGroup.Instantiate<NoteGroup>();
+			CurrentGroup.Range = InitialRange;
+			CurrentGroup.Range += i;
 			this.GetChild(0).AddChild(CurrentGroup);
-			CurrentGroup.
+			Group[i] = CurrentGroup;//***Todo***
 		}
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }
