@@ -9,8 +9,7 @@ public partial class PlayMode : Button
 		Arpeggio
 	}
 
-
-	[Export] private _Mode Mode = _Mode.Chord;
+	[Export] private _Mode Mode = _Mode.Arpeggio;
 	private void _pressed(){
 		Mode++;
 		int Index = (int)Mode;

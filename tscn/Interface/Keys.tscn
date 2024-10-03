@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://bca0lwvx23752"]
 
-[ext_resource type="Script" path="res://Scripts/Notes.cs" id="1_p7iho"]
+[ext_resource type="Script" path="res://Scripts/Key/Keys.cs" id="1_fuskj"]
 
-[node name="Notes" type="MarginContainer"]
+[node name="Keys" type="MarginContainer"]
 offset_right = 11.0
 offset_bottom = 46.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
-script = ExtResource("1_p7iho")
+script = ExtResource("1_fuskj")
 
 [node name="NoteHAlign" type="HBoxContainer" parent="."]
 layout_mode = 2

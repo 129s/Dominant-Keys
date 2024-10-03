@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dskxfs6wb5ijf"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://dskxfs6wb5ijf"]
 
 [ext_resource type="Texture2D" uid="uid://bdvyks2h0xg2m" path="res://Assets/Spin.png" id="1_bydht"]
 [ext_resource type="StyleBox" uid="uid://c4m1ph3whaxe2" path="res://resources/Button_Hover_style_box_flat.tres" id="1_xco7p"]
@@ -13,6 +13,8 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_av7uh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_librr"]
 
@@ -88,6 +90,7 @@ CheckButton/styles/hover_pressed = ExtResource("2_fckh1")
 CheckButton/styles/normal = ExtResource("2_fckh1")
 CheckButton/styles/pressed = ExtResource("2_fckh1")
 LineEdit/font_sizes/font_size = 16
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_av7uh")
 OptionButton/styles/focus = SubResource("StyleBoxEmpty_librr")
 SpinBox/icons/updown = ExtResource("1_bydht")
 TabBar/colors/font_unselected_color = Color(1, 1, 1, 0.415686)

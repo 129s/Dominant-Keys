@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cocumut0st26i"]
 
-[ext_resource type="Script" path="res://Scripts/NoteGroup.cs" id="1_wrhew"]
-[ext_resource type="Script" path="res://Scripts/Note.cs" id="1_x1trx"]
+[ext_resource type="Script" path="res://Scripts/Key/KeyGroup.cs" id="1_vspdi"]
+[ext_resource type="Script" path="res://Scripts/Key/Key.cs" id="2_pj1m2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqtiu"]
 
@@ -60,12 +60,12 @@ border_color = Color(0.113725, 0.133333, 0.160784, 1)
 corner_detail = 1
 anti_aliasing = false
 
-[node name="NoteGroup" type="PanelContainer"]
+[node name="KeyGroup" type="PanelContainer"]
 offset_right = 267.0
 offset_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_wrhew")
+script = ExtResource("1_vspdi")
 
 [node name="WhiteNotes" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -84,7 +84,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 button_mask = 3
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 
 [node name="D" type="Button" parent="WhiteNotes"]
 custom_minimum_size = Vector2(16, 64)
@@ -97,7 +97,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
 text = " "
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 2
 
 [node name="E" type="Button" parent="WhiteNotes"]
@@ -110,7 +110,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 4
 
 [node name="F" type="Button" parent="WhiteNotes"]
@@ -123,7 +123,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 5
 
 [node name="G" type="Button" parent="WhiteNotes"]
@@ -136,7 +136,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 7
 
 [node name="A" type="Button" parent="WhiteNotes"]
@@ -149,7 +149,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 9
 
 [node name="B" type="Button" parent="WhiteNotes"]
@@ -162,7 +162,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mv6vl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_q23aj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6jnw7")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyName = 11
 
 [node name="BlackNotes" type="HBoxContainer" parent="."]
@@ -208,7 +208,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_x7a02")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyType = 1
 KeyName = 1
 
@@ -248,7 +248,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_x7a02")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyType = 1
 KeyName = 3
 
@@ -298,7 +298,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_x7a02")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyType = 1
 KeyName = 6
 
@@ -338,7 +338,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_x7a02")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyType = 1
 KeyName = 8
 
@@ -377,7 +377,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_x7a02")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4l8oy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5cqu")
 toggle_mode = true
-script = ExtResource("1_x1trx")
+script = ExtResource("2_pj1m2")
 KeyType = 1
 KeyName = 10
 

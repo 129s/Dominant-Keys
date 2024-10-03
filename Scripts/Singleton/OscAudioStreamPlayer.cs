@@ -1,18 +1,12 @@
 using Godot;
 using System;
-using System.Security.Cryptography.X509Certificates;
-
-struct Setting{
-	public static float mix_rate = 441000F;
-	public enum BasicWaves {Sine,Square,Triangle,Pulse,Saw,Random}
-};
-
+using Setting;
 
 
 public partial class OscAudioStreamPlayer : AudioStreamPlayer
 {
-	[Flags]
-
+	public Random random = new Random();
+	
     private enum _KeyName {
         C,Db,D,Eb,E,F,Gb,G,Ab,A,Bb,B
     }
@@ -20,11 +14,15 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
     public static OscAudioStreamPlayer Instance { get; set; }
 	private AudioStreamGeneratorPlayback playback = null;
 
-    private Setting.BasicWaves Wave;
+    private AudioSettings.BasicWaves Wave;
 
     public float value;
 
-	public int[] BitMasks = new int[7];//Up to 7 NoteGroups
+	public int[] BitMasks = new int[7];//Up to 7 KeyGroups
+
+	public float VoiceAmount;
+
+	public bool KeyChanged = false;
 
 
 
@@ -40,11 +38,11 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
 		// GD.Print(Player);
 		var generator = (AudioStreamGenerator)Instance.Stream;
 		// GD.Print(generator);
-		generator.MixRate = Setting.mix_rate;
+		generator.MixRate = AudioSettings.mix_rate;
 		playback = (AudioStreamGeneratorPlayback)Instance.GetStreamPlayback();
 
 		((OptionButton)OptionsBar.Instance.FindChild("Waves")).ItemSelected += 
-		(index) => Wave = (Setting.BasicWaves)index;//OptionsBar must precede this singleton into SceneTree
+		(index) => Wave = (AudioSettings.BasicWaves)index;//OptionsBar must precede this singleton into SceneTree
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -52,30 +50,36 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
         _fill_buffer();
     }
 
-    private static int MaxNote = 12*10;
-    private float[] phase = new float[MaxNote];
-
+    private static int MaxKey = 12*10;
+    private float[] phase = new float[MaxKey];
 	internal void _fill_buffer(){
 		int to_fill = playback.GetFramesAvailable();
 
 		while (to_fill >0){
-			value = 0;
+			
+			if (KeyChanged){
+				value = 0;
+				VoiceAmount = 0;
 
-			for (int range=0;range<7;range++){
-				int BitMask = BitMasks[range];
-				if (BitMask == 0){
-					continue;
-				}
-				for (int i=0;BitMask!=0;i++){
-					if ((BitMask&1)==1){
-						value += calculate_value(Wave,i,range);
+				for (int range=0;range<7;range++){
+					int BitMask = BitMasks[range];
+					if (BitMask == 0){
+						continue;
 					}
-					BitMask >>= 1 ;
+					for (int i=0;BitMask!=0;i++){
+						if ((BitMask&1)==1){
+							VoiceAmount++;
+							value += calculate_value(Wave,i,range);
+						}
+						BitMask >>= 1 ;
+					}
 				}
 			}
-
+			
 			playback.PushFrame(Vector2.One * value);
 			to_fill-=1;
+
+			KeyChanged ^= true;
 		}
     }
 
@@ -90,29 +94,30 @@ public partial class OscAudioStreamPlayer : AudioStreamPlayer
 	}
 	
 
- 	internal float calculate_value(Setting.BasicWaves Wave,int index,int range){
+ 	internal float calculate_value(AudioSettings.BasicWaves Wave,int index,int range){
+		float Amp = 0.2f;
 		float result;
 		float frequency = _get_frequency(index,range);
-		float increment = frequency / Setting.mix_rate;
-		result = (0.1f)*(float)Choose_Wave(Wave,index,range);
+		float increment = frequency / AudioSettings.mix_rate;
+		result = Amp*(float)Choose_Wave(Wave,index,range);
 		phase[index+range*12] = (float)Mathf.PosMod(phase[index+range*12]+increment,1.0);
 		return result;
     }
 
-	float Choose_Wave(Setting.BasicWaves Wave,int index,int range){
+	float Choose_Wave(AudioSettings.BasicWaves Wave,int index,int range){
 		float CurrentPhase = phase[index+range*12];
 		switch(Wave){
-			case Setting.BasicWaves.Sine:
+			case AudioSettings.BasicWaves.Sine:
 				return (float)Mathf.Sin(Math.Tau*CurrentPhase);
-			case Setting.BasicWaves.Square:
+			case AudioSettings.BasicWaves.Square:
 				return (CurrentPhase<0.5)?0:1;
-			case Setting.BasicWaves.Triangle:
+			case AudioSettings.BasicWaves.Triangle:
 				return (CurrentPhase<0.5)?(2*CurrentPhase-0.5F):-2*(CurrentPhase-0.75F);
-			case Setting.BasicWaves.Pulse:
+			case AudioSettings.BasicWaves.Pulse:
 				return (CurrentPhase<0.25)?0:1;
-			case Setting.BasicWaves.Saw:
+			case AudioSettings.BasicWaves.Saw:
 				return CurrentPhase-0.5F;
-			case Setting.BasicWaves.Random:
+			case AudioSettings.BasicWaves.Random:
 				return 0;
 			default:
 				return 0;

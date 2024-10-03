@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b03hhfg7m33su"]
+[gd_scene load_steps=4 format=3 uid="uid://b03hhfg7m33su"]
 
-[ext_resource type="PackedScene" uid="uid://bca0lwvx23752" path="res://tscn/Interface/notes.tscn" id="1_53tbe"]
+[ext_resource type="PackedScene" uid="uid://bca0lwvx23752" path="res://tscn/Interface/Keys.tscn" id="1_53tbe"]
 [ext_resource type="Theme" uid="uid://dskxfs6wb5ijf" path="res://resources/Interface.tres" id="1_hxcdu"]
 [ext_resource type="PackedScene" uid="uid://cp736iyjcgijw" path="res://tscn/Interface/options_bar.tscn" id="1_rvvps"]
-[ext_resource type="Script" path="res://Scripts/OptionsBar.cs" id="3_5l21h"]
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -44,9 +43,8 @@ theme_override_constants/separation = 0
 
 [node name="OptionsBar" parent="Container/Keyboard/VBoxContainer" instance=ExtResource("1_rvvps")]
 layout_mode = 2
-script = ExtResource("3_5l21h")
 
-[node name="Notes" parent="Container/Keyboard/VBoxContainer" instance=ExtResource("1_53tbe")]
+[node name="Keys" parent="Container/Keyboard/VBoxContainer" instance=ExtResource("1_53tbe")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 2

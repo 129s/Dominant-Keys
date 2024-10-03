@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cp736iyjcgijw"]
+[gd_scene load_steps=23 format=3 uid="uid://cp736iyjcgijw"]
 
+[ext_resource type="Script" path="res://Scripts/UI/OptionsBar.cs" id="1_712ke"]
 [ext_resource type="Theme" uid="uid://dskxfs6wb5ijf" path="res://resources/Interface.tres" id="1_wu7xe"]
 [ext_resource type="Texture2D" uid="uid://c6be76uiv177d" path="res://Assets/BasicWaves.png" id="2_gsxed"]
-[ext_resource type="Script" path="res://Scripts/PitchLabels.cs" id="2_wt6yv"]
+[ext_resource type="Texture2D" uid="uid://cehmm3kutkkie" path="res://icon.png" id="2_k14xe"]
+[ext_resource type="Script" path="res://Scripts/UI/PitchLabels.cs" id="2_wt6yv"]
 [ext_resource type="Texture2D" uid="uid://bv5u41eo7us0m" path="res://Assets/Reset.png" id="3_abuks"]
 [ext_resource type="Texture2D" uid="uid://dbkvpmenebr0d" path="res://Assets/PlayModeIcon.png" id="4_d6vbe"]
-[ext_resource type="Script" path="res://Scripts/PlayMode.cs" id="5_kp531"]
-[ext_resource type="Script" path="res://Scripts/Reset.cs" id="7_kepn2"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayMode.cs" id="5_kp531"]
+[ext_resource type="Script" path="res://Scripts/UI/Reset.cs" id="7_kepn2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_72v25"]
 
@@ -53,13 +55,41 @@ TabBar/constants/h_separation = 0
 atlas = ExtResource("4_d6vbe")
 region = Rect2(0, 0, 26, 18)
 
+[sub_resource type="InputEventKey" id="InputEventKey_xiivs"]
+keycode = 82
+
+[sub_resource type="Shortcut" id="Shortcut_i6bjk"]
+events = [SubResource("InputEventKey_xiivs")]
+
 [node name="OptionsBar" type="HBoxContainer"]
 offset_left = 2.0
 offset_top = 24.0
-offset_right = 1044.0
+offset_right = 950.0
 offset_bottom = 63.0
 theme_override_constants/separation = 0
 alignment = 2
+script = ExtResource("1_712ke")
+
+[node name="Logo" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
+
+[node name="Logo" type="PanelContainer" parent="Logo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_72v25")
+
+[node name="Background" type="PanelContainer" parent="Logo/Logo"]
+layout_mode = 2
+theme = ExtResource("1_wu7xe")
+
+[node name="Logo" type="TextureRect" parent="Logo/Logo"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_k14xe")
 
 [node name="Title" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -69,17 +99,17 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 2
 
-[node name="Logo" type="PanelContainer" parent="Title"]
+[node name="Text" type="PanelContainer" parent="Title"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_72v25")
 
-[node name="Background" type="PanelContainer" parent="Title/Logo"]
+[node name="Background" type="PanelContainer" parent="Title/Text"]
 layout_mode = 2
 theme = ExtResource("1_wu7xe")
 
-[node name="LogoText" type="Label" parent="Title/Logo"]
+[node name="Text" type="Label" parent="Title/Text"]
 layout_mode = 2
 text = "Dominant Keys V1.0"
 label_settings = SubResource("LabelSettings_ijs0t")
@@ -183,7 +213,23 @@ theme_override_constants/margin_bottom = 2
 [node name="Reset" type="Button" parent="Reset"]
 layout_mode = 2
 theme = ExtResource("1_wu7xe")
+shortcut = SubResource("Shortcut_i6bjk")
 text = "Reset"
 icon = ExtResource("3_abuks")
 icon_alignment = 2
 script = ExtResource("7_kepn2")
+
+[node name="Bpm" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme = ExtResource("1_wu7xe")
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
+
+[node name="Bpm" type="LineEdit" parent="Bpm"]
+layout_mode = 2
+text = "120"
+placeholder_text = "Input Bpm"
+alignment = 1
